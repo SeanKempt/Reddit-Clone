@@ -1,10 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+$body: #f6f7f8;
+$bg: #dae0e6;
+$neutral: #ffffff;
+$bodytext: #1c1c1c;
+$post: #fff;
+
+[data-theme='dark'] {
+  $body: #272729;
+  $bg: #030303;
+  $neutral: #1a1a1b;
+  $bodytext: #d7dadc;
+  $post: #343536;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .header {
-  background-color: rgb(158, 69, 69);
+  background-color: $neutral;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  color: $bodytext;
+}
+
+.header__search {
+  border-radius: 30px;
+  background-color: $body;
+  color: $bodytext;
+  width: 40%;
+}
+
+.postcard__container {
+  background-color: $post;
+  color: $bodytext;
+  max-width: 60%;
+  display: flex;
 }
 
 .main {
-  background-color: rgb(59, 92, 92);
+  background-color: $bg;
   display: grid;
   min-height: 100vh;
   min-height: 100dvh;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: repeat(6, 1fr);
+  justify-items: center;
 }
