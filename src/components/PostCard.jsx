@@ -2,6 +2,9 @@ const PostCard = () => (
   <div className="postcard__container">
     <div className="post__upvotes">100</div>
     <div className="post">
+      <p className="post__data">
+        community - posted by lorem ipsum 10 hours ago
+      </p>
       <p className="post__title">post title goes here</p>
       <p className="post__body">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi,

@@ -3,15 +3,18 @@
 $body: #f6f7f8;
 $bg: #dae0e6;
 $neutral: #ffffff;
-$bodytext: #1c1c1c;
-$post: #fff;
+$postbodytext: #1c1c1c;
+$postbg: #fff;
+
+$font-title: 2rem;
+$font-post_title: 1.25rem;
 
 [data-theme='dark'] {
   $body: #272729;
   $bg: #030303;
   $neutral: #1a1a1b;
-  $bodytext: #d7dadc;
-  $post: #343536;
+  $postbodytext: #d7dadc;
+  $postbg: #343536;
 }
 
 body {
@@ -25,21 +28,44 @@ body {
 }
 
 .header__title {
-  color: $bodytext;
+  color: $postbodytext;
+  font-size: $font-title;
 }
 
 .header__search {
   border-radius: 30px;
   background-color: $body;
-  color: $bodytext;
+  color: $postbodytext;
   width: 40%;
 }
 
 .postcard__container {
-  background-color: $post;
-  color: $bodytext;
-  max-width: 60%;
+  background-color: $postbg;
+  color: $postbodytext;
+  max-width: 700px;
+  width: 55%;
   display: flex;
+  margin-top: 1rem;
+}
+
+.post__upvotes {
+  padding-right: 0.5rem;
+  background-color: $body;
+  padding: 3px 5px;
+}
+
+.post__title {
+  font-size: $font-post_title;
+}
+
+.post__data {
+  font-size: 0.75rem;
+}
+
+.post__body,
+.post__title,
+.post__data {
+  padding-left: 0.5rem;
 }
 
 .main {
