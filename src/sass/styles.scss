@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css');
 
 $body: #f6f7f8;
 $bg: #dae0e6;
@@ -24,7 +25,6 @@ body {
 .header {
   background-color: $neutral;
   display: flex;
-  justify-content: space-between;
 }
 
 .header__title {
@@ -32,26 +32,34 @@ body {
   font-size: $font-title;
 }
 
+.header__logo {
+  width: 3rem;
+  height: 3rem;
+}
+
 .header__search {
   border-radius: 30px;
   background-color: $body;
   color: $postbodytext;
-  width: 40%;
+  width: 30%;
+  margin: 0 auto;
 }
 
 .postcard__container {
   background-color: $postbg;
   color: $postbodytext;
-  max-width: 700px;
-  width: 55%;
+  max-width: 750px;
+  width: 100%;
   display: flex;
   margin-top: 1rem;
+  grid-column: 2 / 3;
 }
 
 .post__upvotes {
   padding-right: 0.5rem;
   background-color: $body;
   padding: 3px 5px;
+  text-align: center;
 }
 
 .post__title {

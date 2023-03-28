@@ -1,6 +1,10 @@
 const PostCard = () => (
   <div className="postcard__container">
-    <div className="post__upvotes">100</div>
+    <div className="post__upvotes">
+      <i className="bi bi-arrow-up-circle" />
+      100
+      <i className="bi bi-arrow-down-circle" />
+    </div>
     <div className="post">
       <p className="post__data">
         community - posted by lorem ipsum 10 hours ago
