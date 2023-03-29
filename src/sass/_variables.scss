@@ -1,0 +1,16 @@
+$body: #f6f7f8;
+$bg: #dae0e6;
+$neutral: #ffffff;
+$postbodytext: #1c1c1c;
+$postbg: #fff;
+
+$font-title: 2rem;
+$font-post_title: 1.25rem;
+
+[data-theme='dark'] {
+  $body: #272729;
+  $bg: #030303;
+  $neutral: #1a1a1b;
+  $postbodytext: #d7dadc;
+  $postbg: #343536;
+}
