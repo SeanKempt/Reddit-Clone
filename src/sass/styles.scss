@@ -60,6 +60,18 @@ body {
   padding-right: 1rem;
 }
 
+.post__utils--buttons {
+  list-style-type: none;
+  display: flex;
+  padding-left: 0.5rem;
+  li {
+    padding-right: 1rem;
+  }
+  i {
+    padding-right: 0.5rem;
+  }
+}
+
 .postfilter {
   background-color: $postbg;
   width: 100%;

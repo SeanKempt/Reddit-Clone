@@ -5,7 +5,7 @@ const PostCard = () => (
       100
       <i className="bi bi-arrow-down-circle" />
     </div>
-    <div className="post">
+    <article className="post">
       <p className="post__data">
         community - posted by lorem ipsum 10 hours ago
       </p>
@@ -16,7 +16,19 @@ const PostCard = () => (
         temporibus ea et reiciendis, ad ab repellat mollitia placeat. Harum, sed
         odio?
       </p>
-    </div>
+      <div className="post__utils">
+        <ul className="post__utils--buttons">
+          <li>
+            <i className="bi bi-chat-left" />
+            Comments
+          </li>
+          <li>
+            <i className="bi bi-share" />
+            Share
+          </li>
+        </ul>
+      </div>
+    </article>
   </div>
 );
 
