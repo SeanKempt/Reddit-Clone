@@ -6,7 +6,7 @@ import CreatePostCard from './components/CreatePostCard';
 import PostFilter from './components/PostFilter';
 
 const App = () => (
-  <div className="App pagewrapper">
+  <div className="pagewrapper">
     <Header />
     <main className="main">
       <CreatePostCard />
