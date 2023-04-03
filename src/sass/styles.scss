@@ -92,3 +92,55 @@ body {
 .postfilter__buttons {
   padding-right: 2rem;
 }
+
+.fullpost__container {
+  max-width: 750px;
+}
+
+.fullpost__comments {
+  background-color: $postbg;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  hr {
+    width: 75%;
+  }
+}
+
+.fullpost__comments--text {
+  resize: none;
+  width: 80%;
+}
+
+.fullpost__comments--name {
+  align-self: flex-start;
+  margin-left: 5rem;
+}
+
+.fullpost__comments--button {
+  width: 7rem;
+}
+
+.comment {
+  background-color: $postbg;
+  padding: 1rem 0 0 1rem;
+}
+
+.comment__utils {
+  list-style-type: none;
+  display: flex;
+  padding-left: 0;
+  margin: 0;
+  li {
+    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+  }
+  i {
+    padding-top: 0.5rem;
+    padding-left: 0.25rem;
+  }
+}
+
+.comment__main {
+  width: 80%;
+}
