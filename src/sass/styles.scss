@@ -115,7 +115,8 @@ body {
 
 .fullpost__comments--name {
   align-self: flex-start;
-  margin-left: 5rem;
+  margin-left: 4.75rem;
+  font-size: 0.75rem;
 }
 
 .fullpost__comments--button {
@@ -125,6 +126,10 @@ body {
 .comment {
   background-color: $postbg;
   padding: 1rem 0 0 1rem;
+}
+
+.comment__user {
+  font-size: 0.75rem;
 }
 
 .comment__utils {
