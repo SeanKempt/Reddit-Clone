@@ -1,5 +1,13 @@
-const PostCard = () => (
-  <div className="postcard__container">
+import PropTypes from 'prop-types';
+
+const PostCard = ({ handleNavigateToPost }) => (
+  <section
+    className="postcard__container"
+    onClick={handleNavigateToPost}
+    onKeyDown={handleNavigateToPost}
+    role="link"
+    tabIndex={0}
+  >
     <div className="post__upvotes">
       <i className="bi bi-arrow-up-circle" />
       100
@@ -29,7 +37,11 @@ const PostCard = () => (
         </ul>
       </div>
     </article>
-  </div>
+  </section>
 );
+
+PostCard.propTypes = {
+  handleNavigateToPost: PropTypes.func,
+};
 
 export default PostCard;
