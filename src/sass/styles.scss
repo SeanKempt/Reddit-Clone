@@ -24,6 +24,11 @@ body {
   padding: 1rem;
 }
 
+.createpost__body {
+  resize: vertical;
+  max-height: 200px;
+}
+
 .postcard__container {
   background-color: $postbg;
   color: $postbodytext;
