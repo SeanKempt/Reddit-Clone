@@ -16,7 +16,7 @@ body {
   display: flex;
   align-items: center;
   input {
-    width: 100%;
+    width: 90%;
   }
   i {
     padding-right: 1rem;
@@ -25,13 +25,23 @@ body {
 }
 
 .createpost__body {
+  min-height: 30px;
   resize: vertical;
-  max-height: 200px;
+  width: 90%;
+  max-height: 250px;
+}
+
+.createpost__button {
+  margin-right: 3rem;
+  justify-self: center;
+  align-self: center;
+  width: 6rem;
 }
 
 .postcard__container {
   background-color: $postbg;
   color: $postbodytext;
+  width: 100%;
   max-width: 750px;
   display: flex;
   grid-column: 2 / 3;
@@ -43,6 +53,8 @@ body {
   background-color: $body;
   padding: 3px 5px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .post__title {

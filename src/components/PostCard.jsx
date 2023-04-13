@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const PostCard = ({ handleNavigateToPost }) => (
+const PostCard = ({ handleNavigateToPost, postValues }) => (
   <section
     className="postcard__container"
     onClick={handleNavigateToPost}
@@ -10,20 +10,13 @@ const PostCard = ({ handleNavigateToPost }) => (
   >
     <div className="post__upvotes">
       <i className="bi bi-arrow-up-circle" />
-      100
+      {postValues.upvotes}
       <i className="bi bi-arrow-down-circle" />
     </div>
     <article className="post">
-      <p className="post__data">
-        community - posted by lorem ipsum 10 hours ago
-      </p>
-      <p className="post__title">post title goes here</p>
-      <p className="post__body">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi,
-        consectetur quis. Voluptatibus veniam odio omnis labore, numquam dolorum
-        temporibus ea et reiciendis, ad ab repellat mollitia placeat. Harum, sed
-        odio?
-      </p>
+      <p className="post__data">community - posted by {postValues.user}</p>
+      <p className="post__title">{postValues.title}</p>
+      <p className="post__body">{postValues.body}</p>
       <div className="post__utils">
         <ul className="post__utils--buttons">
           <li>
@@ -42,6 +35,7 @@ const PostCard = ({ handleNavigateToPost }) => (
 
 PostCard.propTypes = {
   handleNavigateToPost: PropTypes.func,
+  postValues: PropTypes.object,
 };
 
 export default PostCard;
