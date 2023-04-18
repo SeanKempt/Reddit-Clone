@@ -2,7 +2,6 @@ import './sass/reset.scss';
 import './sass/styles.scss';
 import uniqid from 'uniqid';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PostCard from './components/PostCard.jsx';
 import Header from './components/Header';
 import CreatePostCard from './components/CreatePostCard';
@@ -12,8 +11,6 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [postInput, setPostInput] = useState({ body: '', title: '' });
   const [posts, setPosts] = useState([]);
-
-  const navigate = useNavigate();
 
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
@@ -33,10 +30,6 @@ const App = () => {
     });
   };
 
-  const handleNavigateToPost = () => {
-    navigate('/Post');
-  };
-
   const handleCreatePost = (title, body, user) =>
     setPosts([
       ...posts,
@@ -48,6 +41,11 @@ const App = () => {
       body: '',
       title: '',
     });
+  };
+
+  const getPost = (id) => {
+    const post = posts.find((pt) => pt.id === id);
+    return post ?? null;
   };
 
   return (
@@ -63,15 +61,11 @@ const App = () => {
         />
         <PostFilter />
         {posts.map((post) => (
-          <PostCard
-            handleNavigateToPost={handleNavigateToPost}
-            postValues={post}
-            key={post.id}
-          />
+          <PostCard postValues={post} key={post.id} />
         ))}
       </main>
     </div>
   );
 };
 
-export default App;
+export default { App };
