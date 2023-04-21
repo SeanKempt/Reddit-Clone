@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 const PostCard = ({ postValues }) => (
-  <section className="postcard__container" role="link" tabIndex={0}>
+  <section className="postcard__container">
     <div className="post__upvotes">
-      <i className="bi bi-arrow-up-circle" />
+      <i className="bi bi-arrow-up-circle post__upvotes--arrow" />
       {postValues.upvotes}
-      <i className="bi bi-arrow-down-circle" />
+      <i className="bi bi-arrow-down-circle post__upvotes--arrow" />
     </div>
     <article className="post">
       <p className="post__data">community - posted by {postValues.user}</p>

@@ -1,13 +1,14 @@
 import './sass/reset.scss';
 import './sass/styles.scss';
 import uniqid from 'uniqid';
+import { useNavigate, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import PostCard from './components/PostCard.jsx';
-import Header from './components/Header';
-import CreatePostCard from './components/CreatePostCard';
-import PostFilter from './components/PostFilter';
+import Home from './components/Home';
+import Layout from './components/Layout';
+import Post from './components/Post';
 
 const App = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [postInput, setPostInput] = useState({ body: '', title: '' });
   const [posts, setPosts] = useState([]);
@@ -48,24 +49,42 @@ const App = () => {
     return post ?? null;
   };
 
+  const handlePostClick = (id) => {
+    const post = getPost(id);
+    navigate(`/post/${id}`, { state: post });
+  };
+
   return (
-    <div className="pagewrapper">
-      <Header search={search} handleSearch={handleSearchInputChange} />
-      <main className="main">
-        <CreatePostCard
-          postInput={postInput}
-          handlePostBodyChange={handlePostBodyChange}
-          handlePostTitleChange={handlePostTitleChange}
-          handleCreatePost={handleCreatePost}
-          resetPostInput={resetPostInput}
-        />
-        <PostFilter />
-        {posts.map((post) => (
-          <PostCard postValues={post} key={post.id} />
-        ))}
-      </main>
+    <div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout
+              search={search}
+              handleSearchInputChange={handleSearchInputChange}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Home
+                posts={posts}
+                handlePostClick={handlePostClick}
+                handlePostTitleChange={handlePostTitleChange}
+                handlePostBodyChange={handlePostBodyChange}
+                handleCreatePost={handleCreatePost}
+                resetPostInput={resetPostInput}
+                postInput={postInput}
+              />
+            }
+          />
+        </Route>
+        <Route path="/post/:postId" element={<Post postData={posts} />} />
+      </Routes>
     </div>
   );
 };
 
-export default { App };
+export default App;

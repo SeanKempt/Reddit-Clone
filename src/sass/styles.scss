@@ -14,6 +14,8 @@ body {
   max-width: 750px;
   width: 100%;
   display: flex;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   align-items: center;
   input {
     width: 90%;
@@ -48,17 +50,29 @@ body {
   width: 100%;
   max-width: 750px;
   display: flex;
+  border-radius: 3px;
   grid-column: 2 / 3;
   margin-bottom: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .post__upvotes {
   padding-right: 0.5rem;
   background-color: $body;
-  padding: 3px 5px;
+  padding: 5px 5px;
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+.post__upvotes--arrow {
+  transition: all 0.3s linear;
+  border-radius: 3px;
+  width: 1.25rem;
+}
+
+.post__upvotes--arrow:hover {
+  background-color: #afb0b1;
 }
 
 .post__title {
@@ -96,7 +110,9 @@ body {
   display: flex;
   align-items: center;
   grid-row: 2 / 2;
+  border-radius: 3px;
   margin-bottom: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .postfilter__filter {
@@ -169,4 +185,14 @@ body {
 
 .comment__main {
   width: 80%;
+}
+
+.postlink {
+  max-width: 750px;
+  width: 100%;
+}
+
+a {
+  display: inherit;
+  text-decoration: none;
 }
