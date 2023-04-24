@@ -54,6 +54,29 @@ const App = () => {
     navigate(`/post/${id}`, { state: post });
   };
 
+  const handleUpvote = (id) => {
+    setPosts(
+      posts.map((ps) => {
+        if (ps.id === id) {
+          return { ...ps, upvotes: (ps.upvotes += 1) };
+        }
+        return ps;
+      })
+    );
+  };
+
+  // todo: probably should just consolidate this into a single function called votes. and just use a switch or a case for when the action is an upvote or a downvote rather than have two seperate functions ---- maybe, idk if there is merit in having two seperate functions for orthogonality.
+  const handleDownvote = (id) => {
+    setPosts(
+      posts.map((ps) => {
+        if (ps.id === id) {
+          return { ...ps, upvotes: (ps.upvotes -= 1) };
+        }
+        return ps;
+      })
+    );
+  };
+
   return (
     <div>
       <Routes>
@@ -77,11 +100,15 @@ const App = () => {
                 handleCreatePost={handleCreatePost}
                 resetPostInput={resetPostInput}
                 postInput={postInput}
+                handleUpvote={handleUpvote}
               />
             }
           />
         </Route>
-        <Route path="/post/:postId" element={<Post postData={posts} />} />
+        <Route
+          path="/post/:postId"
+          element={<Post postData={posts} handleUpvote={handleUpvote} />}
+        />
       </Routes>
     </div>
   );

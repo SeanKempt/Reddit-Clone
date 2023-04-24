@@ -1,9 +1,19 @@
 import PropTypes from 'prop-types';
 
-const PostCard = ({ postValues }) => (
+const PostCard = ({ postValues, handleUpvote }) => (
   <section className="postcard__container">
     <div className="post__upvotes">
-      <i className="bi bi-arrow-up-circle post__upvotes--arrow" />
+      <i
+        className="bi bi-arrow-up-circle post__upvotes--arrow"
+        onClick={(e) => {
+          e.preventDefault();
+          handleUpvote(postValues.id);
+        }}
+        onKeyUp={() => handleUpvote(postValues.id)}
+        role="button"
+        tabIndex={0}
+        aria-label="upvote"
+      />
       {postValues.upvotes}
       <i className="bi bi-arrow-down-circle post__upvotes--arrow" />
     </div>
@@ -29,6 +39,7 @@ const PostCard = ({ postValues }) => (
 
 PostCard.propTypes = {
   postValues: PropTypes.object,
+  handleUpvote: PropTypes.func,
 };
 
 export default PostCard;

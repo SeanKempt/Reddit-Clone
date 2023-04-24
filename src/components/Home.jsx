@@ -11,6 +11,7 @@ const Home = ({
   handleCreatePost,
   resetPostInput,
   posts,
+  handleUpvote,
 }) => (
   <main className="main">
     <CreatePostCard
@@ -23,7 +24,7 @@ const Home = ({
     <PostFilter />
     {posts.map((post) => (
       <Link to={`/post/${post.id}`} className="postlink" key={post.id}>
-        <PostCard postValues={post} />
+        <PostCard postValues={post} handleUpvote={handleUpvote} />
       </Link>
     ))}
   </main>
@@ -31,6 +32,7 @@ const Home = ({
 
 Home.propTypes = {
   postInput: PropTypes.object,
+  handleUpvote: PropTypes.func,
   handlePostBodyChange: PropTypes.func,
   handlePostTitleChange: PropTypes.func,
   handleCreatePost: PropTypes.func,
