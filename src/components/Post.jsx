@@ -5,7 +5,7 @@ import Header from './Header.jsx';
 import PostCard from './PostCard.jsx';
 import CommentCard from './CommentCard';
 
-const Post = ({ postData, handleUpvote }) => {
+const Post = ({ postData, handleUpvote, handleDownvote }) => {
   const { postId } = useParams();
   const post = postData.find((pt) => pt.id === postId);
   const [comment, setComment] = useState('');
@@ -19,7 +19,11 @@ const Post = ({ postData, handleUpvote }) => {
       <Header />
       <main className="fullpost main">
         <div className="fullpost__container">
-          <PostCard postValues={post} handleUpvote={handleUpvote} />
+          <PostCard
+            postValues={post}
+            handleUpvote={handleUpvote}
+            handleDownvote={handleDownvote}
+          />
           {/* //! this needs parameters to be able to load the info that we need. currently that is not happening since the component is empty. */}
           <div className="fullpost__comments">
             <p className="fullpost__comments--name">Comment as testuser.</p>
@@ -47,6 +51,7 @@ const Post = ({ postData, handleUpvote }) => {
 Post.propTypes = {
   postData: PropTypes.array,
   handleUpvote: PropTypes.func,
+  handleDownvote: PropTypes.func,
 };
 
 export default Post;
