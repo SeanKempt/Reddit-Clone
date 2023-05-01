@@ -28,7 +28,7 @@ const PostCard = ({ postValues, handleUpvote, handleDownvote }) => (
       />
     </div>
     <article className="post">
-      <p className="post__data">community - posted by {postValues.user}</p>
+      <p className="post__data">community - posted by {postValues.createdBy}</p>
       <p className="post__title">{postValues.title}</p>
       <p className="post__body">{postValues.body}</p>
       <div className="post__utils">

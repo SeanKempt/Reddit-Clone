@@ -12,6 +12,7 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [postInput, setPostInput] = useState({ body: '', title: '' });
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState('Johnson');
 
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
@@ -31,7 +32,7 @@ const App = () => {
     });
   };
 
-  const handleCreatePost = (title, body, user) =>
+  const handleCreatePost = (title, body) =>
     setPosts([
       ...posts,
       { title, body, id: uniqid(), createdBy: user, upvotes: 0 },
@@ -105,6 +106,7 @@ const App = () => {
               postData={posts}
               handleUpvote={handleUpvote}
               handleDownvote={handleDownvote}
+              user={user}
             />
           }
         />
