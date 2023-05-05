@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import sedditlogo from '../images/seddit-logo.png';
+import { signOutCurrentUser } from '../helpers/firebase';
 
 const Header = ({ search, handleSearch }) => (
   <header className="header">
@@ -18,6 +19,17 @@ const Header = ({ search, handleSearch }) => (
         className="header__search"
       />
     </form>
+    <Link to="/login">
+      <button type="button">Sign in</button>
+    </Link>
+    <button
+      type="button"
+      onClick={() => {
+        signOutCurrentUser();
+      }}
+    >
+      Sign Out
+    </button>
   </header>
 );
 

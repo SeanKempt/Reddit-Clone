@@ -19,7 +19,7 @@ const Post = ({ postData, handleUpvote, handleDownvote, user }) => {
   };
 
   const handlePostComment = () => {
-    setPostComments([...postComments, { username: user, body: comment }]);
+    setPostComments([...postComments, { username: user.name, body: comment }]);
     setComment('');
   };
 
@@ -34,7 +34,7 @@ const Post = ({ postData, handleUpvote, handleDownvote, user }) => {
             handleDownvote={handleDownvote}
           />
           <div className="fullpost__comments">
-            <p className="fullpost__comments--name">Comment as {user}.</p>
+            <p className="fullpost__comments--name">Comment as {user.name}.</p>
             <textarea
               name="commententer"
               cols="70"
@@ -68,7 +68,7 @@ Post.propTypes = {
   postData: PropTypes.array,
   handleUpvote: PropTypes.func,
   handleDownvote: PropTypes.func,
-  user: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default Post;

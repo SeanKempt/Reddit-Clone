@@ -196,3 +196,39 @@ a {
   display: inherit;
   text-decoration: none;
 }
+
+.register__form,
+.login__form {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 10px;
+  input {
+    margin-bottom: 5px;
+  }
+}
+
+.register__form--button,
+.login__form--button {
+  margin: 10px 0;
+}
+
+.register__content,
+.login__content {
+  width: 50%;
+}
+
+.register__wrapper,
+.login__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login__registerbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    margin: 0 5px;
+  }
+}

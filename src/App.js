@@ -5,14 +5,21 @@ import { useNavigate, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import Home from './components/Home';
 import Layout from './components/Layout';
+import Register from './components/Register';
 import Post from './components/Post';
+import { getCurrentSignedInUser } from './helpers/firebase';
+import Login from './components/Login';
 
 const App = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [postInput, setPostInput] = useState({ body: '', title: '' });
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState('Johnson');
+  // This is an object with three properties (name, emailaddress, photoUrl), get populated after sign in
+  const [user, setUser] = useState();
+
+  // todo: disable posting untill someone is signed into the page
+  // todo: if user is signed in then you should show a sign out button. If they aren't signed in then just show only the sign in button
 
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
@@ -25,6 +32,11 @@ const App = () => {
     });
   };
 
+  const changeUserToCurrentUser = async () => {
+    const currentUser = await getCurrentSignedInUser();
+    setUser(currentUser);
+  };
+
   const handlePostTitleChange = (e) => {
     setPostInput({
       ...postInput,
@@ -35,7 +47,7 @@ const App = () => {
   const handleCreatePost = (title, body) =>
     setPosts([
       ...posts,
-      { title, body, id: uniqid(), createdBy: user, upvotes: 0 },
+      { title, body, id: uniqid(), createdBy: user.name, upvotes: 0 },
     ]);
 
   const resetPostInput = () => {
@@ -96,6 +108,18 @@ const App = () => {
                 handleUpvote={handleUpvote}
                 handleDownvote={handleDownvote}
               />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <Register changeUserToCurrentUser={changeUserToCurrentUser} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Login changeUserToCurrentUser={changeUserToCurrentUser} />
             }
           />
         </Route>
