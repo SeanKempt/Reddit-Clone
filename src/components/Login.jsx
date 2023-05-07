@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { signInRegular } from '../helpers/firebase';
@@ -6,6 +6,8 @@ import { signInRegular } from '../helpers/firebase';
 const Login = ({ changeUserToCurrentUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -38,10 +40,10 @@ const Login = ({ changeUserToCurrentUser }) => {
           <button
             type="button"
             className="login__form--button"
-            onClick={() => {
-              signInRegular(email, password);
-              // todo need to move change user to current user somewhere else or make it async somehowg
+            onClick={async () => {
+              await signInRegular(email, password);
               changeUserToCurrentUser();
+              navigate('/');
             }}
           >
             Login

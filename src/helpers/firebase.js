@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -21,14 +22,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // user is signed in
+    const { displayName, email, photoURL } = user;
+    return {
+      name: displayName,
+      emailaddress: email,
+      profilepic: photoURL,
+    };
+  }
+  // User is signed out
+  return new Error('User is signed out!');
+});
 
 const signInWithGoogle = () => {
-  const auth = getAuth(app);
   signInWithPopup(auth, provider);
 };
 
 const signInRegular = (email, password) => {
-  const auth = getAuth(app);
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -38,39 +51,41 @@ const signInRegular = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log('sign in failed for some reason.');
+      console.log(
+        `sign in failed for some reason. ${errorMessage}. ${errorCode}`
+      );
     });
 };
 
 const createUser = (email, password) => {
-  const auth = getAuth(app);
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const { user } = userCredential;
+      console.log(user);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log('sign in failed for some reason.');
+      console.log(
+        `sign in failed for some reason. ${errorMessage}. ${errorCode}`
+      );
     });
 };
 
 const signOutCurrentUser = () => {
-  const auth = getAuth(app);
   signOut(auth)
     .then(() => {
       console.log('sign out successful');
     })
     .catch((error) => {
-      console.log('something weird happened');
+      console.log(`something weird happened. ${error}`);
     });
 };
 
 // Returns an user object that is used to provide props to app component to provide user data to the application
 const getCurrentSignedInUser = () =>
   new Promise((resolve, reject) => {
-    const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // user is signed in
@@ -91,10 +106,23 @@ const getCurrentSignedInUser = () =>
 //   connectAuthEmulator(auth, 'http://localhost:9099');
 // };
 
+const updateUser = (username) => {
+  updateProfile(auth.currentUser, {
+    displayName: username,
+  })
+    .then(() => {
+      console.log(`profile updated succesfully`);
+    })
+    .catch((error) => {
+      console.log(`something failed to update ${error}`);
+    });
+};
+
 export {
   signInWithGoogle,
   signOutCurrentUser,
   getCurrentSignedInUser,
   signInRegular,
   createUser,
+  updateUser,
 };
