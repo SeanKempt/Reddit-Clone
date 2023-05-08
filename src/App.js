@@ -3,7 +3,7 @@ import './sass/styles.scss';
 import uniqid from 'uniqid';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import Home from './components/Home';
+import Home from './components/Home.jsx';
 import Layout from './components/Layout';
 import Register from './components/Register';
 import Post from './components/Post';
@@ -17,9 +17,11 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   // This is an object with three properties (name, emailaddress, photoUrl), get populated after sign in
   const [user, setUser] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // todo: disable posting untill someone is signed into the page
   // todo: if user is signed in then you should show a sign out button. If they aren't signed in then just show only the sign in button
+  // todo: need to fix whatever is going on with the sign in, its not signing in on the first try it'll say that the user is still logged out.
 
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
@@ -34,6 +36,7 @@ const App = () => {
 
   const changeUserToCurrentUser = async () => {
     const currentUser = await getCurrentSignedInUser();
+    setIsLoggedIn(true);
     setUser(currentUser);
   };
 
@@ -107,6 +110,7 @@ const App = () => {
                 postInput={postInput}
                 handleUpvote={handleUpvote}
                 handleDownvote={handleDownvote}
+                isLoggedIn={isLoggedIn}
               />
             }
           />
