@@ -6,10 +6,12 @@ const Layout = ({
   search,
   handleSearchInputChange,
   changeUserToCurrentUser,
+  handleSignOut,
 }) => (
   <div className="pagewrapper">
     <Header
       search={search}
+      handleSignOut={handleSignOut}
       handleSearch={handleSearchInputChange}
       changeUserToCurrentUser={changeUserToCurrentUser}
     />
@@ -21,6 +23,7 @@ Layout.propTypes = {
   search: PropTypes.string,
   handleSearchInputChange: PropTypes.func,
   changeUserToCurrentUser: PropTypes.func,
+  handleSignOut: PropTypes.func,
 };
 
 export default Layout;

@@ -33,7 +33,7 @@ const CreatePostCard = ({
       type="button"
       className="createpost__button"
       onClick={() => {
-        handleCreatePost(postInput.title, postInput.body, 12, 'user1');
+        handleCreatePost(postInput.title, postInput.body);
         resetPostInput();
       }}
     >

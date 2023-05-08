@@ -40,8 +40,8 @@ const Login = ({ changeUserToCurrentUser }) => {
           <button
             type="button"
             className="login__form--button"
-            onClick={async () => {
-              await signInRegular(email, password);
+            onClick={() => {
+              signInRegular(email, password);
               changeUserToCurrentUser();
               navigate('/');
             }}

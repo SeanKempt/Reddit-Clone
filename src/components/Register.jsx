@@ -56,6 +56,7 @@ const Register = ({ changeUserToCurrentUser }) => {
           <button
             type="button"
             className="register__form--button"
+            // async function because without it the username wouldn't update during user creation
             onClick={async () => {
               await createUser(email, password);
               await updateUser(username);

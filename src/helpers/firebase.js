@@ -5,7 +5,6 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signOut,
   updateProfile,
 } from 'firebase/auth';
@@ -23,19 +22,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // user is signed in
-    const { displayName, email, photoURL } = user;
-    return {
-      name: displayName,
-      emailaddress: email,
-      profilepic: photoURL,
-    };
-  }
-  // User is signed out
-  return new Error('User is signed out!');
-});
 
 const signInWithGoogle = () => {
   signInWithPopup(auth, provider);
@@ -57,8 +43,8 @@ const signInRegular = (email, password) => {
     });
 };
 
-const createUser = (email, password) => {
-  createUserWithEmailAndPassword(auth, email, password)
+const createUser = async (email, password) => {
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const { user } = userCredential;
@@ -84,30 +70,21 @@ const signOutCurrentUser = () => {
 };
 
 // Returns an user object that is used to provide props to app component to provide user data to the application
-const getCurrentSignedInUser = () =>
-  new Promise((resolve, reject) => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // user is signed in
-        const { displayName, email, photoURL } = user;
-        resolve({
-          name: displayName,
-          emailaddress: email,
-          profilepic: photoURL,
-        });
-      } else {
-        // User is signed out
-        reject(new Error('User is signed out!'));
-      }
-    });
-  });
+const getCurrentSignedInUser = () => {
+  const user = auth.currentUser;
+  if (user) {
+    const { displayName, email, photoURL } = user;
+    return {
+      name: displayName,
+      emailaddress: email,
+      profilepic: photoURL,
+    };
+  }
+  console.log(`user is currently signed out`);
+};
 
-// const connectToEmulator = () => {
-//   connectAuthEmulator(auth, 'http://localhost:9099');
-// };
-
-const updateUser = (username) => {
-  updateProfile(auth.currentUser, {
+const updateUser = async (username) => {
+  await updateProfile(auth.currentUser, {
     displayName: username,
   })
     .then(() => {
@@ -125,4 +102,6 @@ export {
   signInRegular,
   createUser,
   updateUser,
+  auth,
+  app,
 };

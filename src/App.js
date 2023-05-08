@@ -2,12 +2,17 @@ import './sass/reset.scss';
 import './sass/styles.scss';
 import uniqid from 'uniqid';
 import { useNavigate, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 import Home from './components/Home.jsx';
 import Layout from './components/Layout';
 import Register from './components/Register';
 import Post from './components/Post';
-import { getCurrentSignedInUser } from './helpers/firebase';
+import {
+  getCurrentSignedInUser,
+  signOutCurrentUser,
+  auth,
+} from './helpers/firebase';
 import Login from './components/Login';
 
 const App = () => {
@@ -16,12 +21,28 @@ const App = () => {
   const [postInput, setPostInput] = useState({ body: '', title: '' });
   const [posts, setPosts] = useState([]);
   // This is an object with three properties (name, emailaddress, photoUrl), get populated after sign in
-  const [user, setUser] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
-  // todo: disable posting untill someone is signed into the page
-  // todo: if user is signed in then you should show a sign out button. If they aren't signed in then just show only the sign in button
-  // todo: need to fix whatever is going on with the sign in, its not signing in on the first try it'll say that the user is still logged out.
+  // updates the user state in real time to monitor for changes in login
+  useEffect(() => {
+    const updateUser = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        // user is signed in
+        const { displayName, email, photoURL } = currentUser;
+        setUser({
+          name: displayName,
+          emailaddress: email,
+          profilepic: photoURL,
+        });
+      }
+      // User is signed out
+      setUser(null);
+    });
+
+    return () => {
+      updateUser();
+    };
+  }, []);
 
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
@@ -34,9 +55,8 @@ const App = () => {
     });
   };
 
-  const changeUserToCurrentUser = async () => {
-    const currentUser = await getCurrentSignedInUser();
-    setIsLoggedIn(true);
+  const changeUserToCurrentUser = () => {
+    const currentUser = getCurrentSignedInUser();
     setUser(currentUser);
   };
 
@@ -82,6 +102,10 @@ const App = () => {
     );
   };
 
+  const handleSignOut = () => {
+    signOutCurrentUser();
+  };
+
   const handleUpvote = (id) => handleVote(id, 'upvote');
   const handleDownvote = (id) => handleVote(id, 'downvote');
 
@@ -93,6 +117,7 @@ const App = () => {
           element={
             <Layout
               search={search}
+              handleSignOut={handleSignOut}
               handleSearchInputChange={handleSearchInputChange}
             />
           }
@@ -110,7 +135,7 @@ const App = () => {
                 postInput={postInput}
                 handleUpvote={handleUpvote}
                 handleDownvote={handleDownvote}
-                isLoggedIn={isLoggedIn}
+                user={user}
               />
             }
           />

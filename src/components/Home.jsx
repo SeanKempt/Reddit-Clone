@@ -13,9 +13,9 @@ const Home = ({
   posts,
   handleUpvote,
   handleDownvote,
-  isLoggedIn,
+  user,
 }) => {
-  if (isLoggedIn) {
+  if (user) {
     return (
       <main className="main">
         <CreatePostCard
@@ -50,7 +50,7 @@ Home.propTypes = {
   handleCreatePost: PropTypes.func,
   resetPostInput: PropTypes.func,
   posts: PropTypes.array,
-  isLoggedIn: PropTypes.bool,
+  user: PropTypes.object,
 };
 
 export default Home;

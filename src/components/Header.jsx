@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import sedditlogo from '../images/seddit-logo.png';
-import { signOutCurrentUser } from '../helpers/firebase';
 
-const Header = ({ search, handleSearch }) => (
+const Header = ({ search, handleSearch, handleSignOut }) => (
   <header className="header">
     <Link to="/">
       <img className="header__logo" src={sedditlogo} alt="megaphone" />
@@ -25,7 +24,7 @@ const Header = ({ search, handleSearch }) => (
     <button
       type="button"
       onClick={() => {
-        signOutCurrentUser();
+        handleSignOut();
       }}
     >
       Sign Out
@@ -36,6 +35,7 @@ const Header = ({ search, handleSearch }) => (
 Header.propTypes = {
   search: PropTypes.string,
   handleSearch: PropTypes.func,
+  handleSignOut: PropTypes.func,
 };
 
 export default Header;
