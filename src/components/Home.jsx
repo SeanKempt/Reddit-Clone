@@ -38,7 +38,21 @@ const Home = ({
       </main>
     );
   }
-  return <h1>No one is logged in!</h1>;
+  return (
+    <main className="main">
+      <h1>Sign in to post something!</h1>
+      <PostFilter />
+      {posts.map((post) => (
+        <Link to={`/post/${post.id}`} className="postlink" key={post.id}>
+          <PostCard
+            postValues={post}
+            handleUpvote={handleUpvote}
+            handleDownvote={handleDownvote}
+          />
+        </Link>
+      ))}
+    </main>
+  );
 };
 
 Home.propTypes = {
